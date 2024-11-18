@@ -12,30 +12,61 @@ const Weather = () => {
     const fetchWeather = async () => {
         setLoading(true);
         setError('');
+        setForecast(null);  // Reset forecast when fetching new data
         try {
-            const API_KEY = '782816d981b523a3654aad3f386a014d';
+            const API_KEY = process.env.REACT_APP_API_KEY;
+            if (!API_KEY) {
+                throw new Error('API Key is missing! Please check your environment variable.');
+            }
 
             // Fetch current weather data
             const response = await axios.get(
                 `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
             );
 
-            if (response.data.cod !== 200) {
+            // Handle non-200 response codes
+            if (response.status !== 200) {
+                setError('Something went wrong with fetching the weather data.');
+                setWeather(null);
+                setForecast(null);
+                return;
+            }
+
+            // Check if response contains a 'cod' field and if it is 404
+            if (response.data && response.data.cod === '404') {
                 setError('City not found. Please try again.');
                 setWeather(null);
-            } else {
-                setWeather(response.data);
-                setError('');
-                // Fetch 5-day forecast data
-                const forecastResponse = await axios.get(
-                    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`
-                );
-                setForecast(forecastResponse.data);
+                setForecast(null);
+                return;
             }
+
+            // Successfully retrieved weather data
+            setWeather(response.data);
+            setError('');
+
+            // Fetch 5-day forecast data
+            const forecastResponse = await axios.get(
+                `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`
+            );
+
+            setForecast(forecastResponse.data);
+
         } catch (err) {
-            console.error(err);
-            setError('Something went wrong. Please check your internet connection or try again later.');
+            // Handle specific error cases
+            if (err.response) {
+                if (err.response.status === 401) {
+                    setError('Unauthorized: Invalid API key or missing credentials.');
+                } else if (err.response.status === 404) {
+                    setError('City not found. Please try again.');
+                } else {
+                    setError('Something went wrong. Please check your internet connection or try again later.');
+                }
+            } else {
+                setError('An unknown error occurred. Please check your connection and try again.');
+            }
+
             setWeather(null);
+            setForecast(null); // Reset forecast on error
         } finally {
             setLoading(false);
         }
@@ -47,6 +78,8 @@ const Weather = () => {
             fetchWeather();
         } else {
             setError('Please enter a valid city name.');
+            setWeather(null);
+            setForecast(null); // Reset forecast when city input is invalid
         }
     };
 
