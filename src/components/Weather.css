@@ -1,0 +1,137 @@
+/* Weather Styles */
+input {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 70%;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.weather-container {
+    text-align: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: background-color 0.5s ease;
+}
+
+/* Title */
+.weather-container h1 {
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.weather-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather-form input {
+    padding: 10px;
+    margin-right: 10px;
+    width: 50%;  /* Adjust width for a more balanced input form */
+}
+
+.weather-form button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 16px;
+}
+
+.weather-form button:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Weather result container */
+.weather-result {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.weather-result h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.weather-result p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* Styling for weather icons */
+.weather-icon {
+    width: 100px;
+    height: 100px;
+}
+
+/* Forecast Section */
+.forecast {
+    margin-top: 40px;
+}
+
+.forecast-cards {
+    display: flex;
+    justify-content: space-around;
+}
+
+.forecast-card {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100px;
+    margin-top: 10px;
+}
+
+.forecast-card p {
+    margin: 5px 0;
+}
+
+.forecast-icon {
+    width: 50px;
+    height: 50px;
+}
+
+/* Dynamic Backgrounds */
+.weather-container.sunny {
+    background-color: #ffeb3b;
+}
+
+.weather-container.cloudy {
+    background-color: #90a4ae;
+}
+
+.weather-container.rainy {
+    background-color: #2196f3;
+}
