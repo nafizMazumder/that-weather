@@ -103,7 +103,7 @@ const Weather = () => {
 
     return (
         <div className={`weather-container ${getWeatherBackgroundClass()}`}>
-            <h1>Weather Watch</h1>
+            <h1>That Weather</h1>
             <form className="weather-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
