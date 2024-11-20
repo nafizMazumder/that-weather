@@ -16,6 +16,15 @@ body {
     overflow-x: hidden;
 }
 
+/* Ensure that the image is properly sized and aligned beside the text */
+.header-image {
+    width: 100%; /* Make the image take up the full width of its container */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 40px; /* Optional: Set a maximum width to prevent the image from becoming too large */
+    margin-right: 10px; /* Space between image and text */
+    vertical-align: middle; /* Vertically center the image */
+}
+
 /* Search Section Styling */
 .search-section {
     width: 100%;
@@ -37,6 +46,9 @@ body {
     font-weight: bold;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     margin: 0;
+    flex-shrink: 0; /* Prevent title from shrinking */
+    display: flex; /* Use flexbox to align the image and text */
+    align-items: center; /* Vertically center the text and image */
 }
 
 .weather-form {
@@ -45,6 +57,7 @@ body {
     align-items: center;
     gap: 10px;
     margin: 0;
+    flex-shrink: 0; /* Prevent form from shrinking */
 }
 
 .weather-form input {
@@ -100,15 +113,6 @@ button svg {
     vertical-align: middle;
 }
 
-.location-name {
-    margin-top: 10px;
-    font-size: 16px;
-    color: #555;
-}
-.location-name strong {
-    color: #000;
-}
-
 /* Weather Container (Results and Forecast) */
 .weather-container {
     display: flex;
@@ -120,6 +124,12 @@ button svg {
     background-color: #ffffff;
     padding: 20px;
     position: relative;
+}
+
+.location-name {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 /* Weather Data Section */
@@ -173,6 +183,7 @@ button svg {
     padding: 20px;
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0.9;
 }
 
 .weather-result h2 {
@@ -218,6 +229,7 @@ button svg {
     justify-content: center;
     gap: 15px;
     flex-wrap: wrap;
+    opacity: 0.9;
 }
 
 /* Forecast Card Styling */
@@ -265,6 +277,11 @@ button svg {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .header-image {
+        width: 30px; /* Smaller size for mobile */
+        height: 30px;
+    }
+
     .weather-form input {
         width: 200px;
     }

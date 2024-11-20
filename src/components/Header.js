@@ -1,8 +1,8 @@
-// Header.js
 import React from 'react';
 import { FaSearch, FaLocationArrow } from 'react-icons/fa';
+import weatherImage from '../icon.png';
 
-const Header = ({ city, setCity, fetchWeather, getLocationWeather, loading }) => {
+const Header = ({ city, setCity, fetchWeather, getLocationWeather, loading, locationName }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (city.trim()) {
@@ -12,7 +12,10 @@ const Header = ({ city, setCity, fetchWeather, getLocationWeather, loading }) =>
 
     return (
         <div className="search-section">
-            <h1>That Weather</h1>
+            <h1>
+                <img src={weatherImage} alt="Weather icon" className="header-image" />
+                That Weather
+            </h1>
             <form className="weather-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -40,6 +43,11 @@ const Header = ({ city, setCity, fetchWeather, getLocationWeather, loading }) =>
                     </button>
                 </div>
             </form>
+            {locationName && (
+                <p className="location-name">
+                    City:&nbsp;<strong>{locationName}</strong>
+                </p>
+            )}
         </div>
     );
 };

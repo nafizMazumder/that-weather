@@ -30,7 +30,6 @@ const Weather = ({ city, fetchWeatherByLocation, loading, weatherResult, forecas
 
             {weatherResult && !loading && (
                 <div className="weather-result">
-                    <h2>{weatherResult.name || 'Your Location'}, {weatherResult.sys?.country}</h2>
                     <img
                         src={getWeatherIcon(weatherResult.weather[0].icon)}
                         alt={weatherResult.weather[0].description}
