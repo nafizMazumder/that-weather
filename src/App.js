@@ -109,7 +109,7 @@ const App = () => {
                 fetchWeather={fetchWeather}
                 getLocationWeather={getLocationWeather}
                 loading={loading}
-                locationName={locationName} // Pass locationName to Header
+                locationName={locationName}
             />
             <Weather
                 city={city}
