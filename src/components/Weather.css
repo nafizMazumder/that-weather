@@ -8,43 +8,26 @@
 /* Body Styling */
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #e0f7fa, #e0e0e0);
     color: #333;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
     overflow-x: hidden;
-    padding: 20px;
 }
 
-/* Main Container */
-.weather-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 900px;
+/* Search Section Styling */
+.search-section {
     width: 100%;
     background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
-    padding: 25px;
-    position: relative;
-}
-
-/* Top Section Styling */
-.top-section {
-    width: 100%;
+    padding: 30px 0;
+    text-align: center;
     position: sticky;
     top: 0;
-    background-color: #ffffff;
     z-index: 10;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
 }
 
-.top-section h1 {
+.search-section h1 {
     font-size: 2.5rem;
     color: #007BFF;
     font-weight: bold;
@@ -113,9 +96,22 @@ button svg {
     vertical-align: middle;
 }
 
+/* Weather Container (Results and Forecast) */
+.weather-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    background-color: #ffffff;
+    padding: 20px;
+    position: relative;
+}
+
 /* Weather Data Section */
 .weather-data {
-    width: 100%;
+    width: 80%;
     text-align: center;
     margin-top: 25px;
 }
@@ -157,13 +153,13 @@ button svg {
 .weather-result {
     text-align: center;
     margin-bottom: 25px;
-    width: 100%;
+    width: 80%;
     background-color: #f9f9f9;
     border: 2px solid #ddd;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Added transition for hover effect */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .weather-result h2 {
@@ -187,14 +183,14 @@ button svg {
 
 /* Hover Effect for Weather Result */
 .weather-result:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Forecast Styling */
 .forecast {
     margin-top: 25px;
-    width: 100%;
+    width: 80%;
     text-align: center;
 }
 
@@ -218,14 +214,14 @@ button svg {
     border-radius: 12px;
     padding: 20px;
     text-align: center;
-    width: 100%; /* Full width for all cards to make them uniform */
+    width: 100%;
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    margin-bottom: 15px; /* Added margin-bottom to separate forecast cards */
+    margin-bottom: 15px;
 }
 
 .forecast-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -261,11 +257,15 @@ button svg {
     }
 
     .forecast-card {
-        width: 100%; /* Full width on smaller screens */
+        width: 100%;
     }
 
     .weather-container {
         padding: 15px;
+    }
+
+    .search-section h1 {
+        font-size: 2rem;
     }
 }
 
@@ -275,10 +275,14 @@ button svg {
     }
 
     .forecast-card {
-        width: 100%; /* Full width on small screens */
+        width: 100%;
     }
 
     .weather-container {
         padding: 15px;
+    }
+
+    .search-section h1 {
+        font-size: 1.5rem;
     }
 }

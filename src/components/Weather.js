@@ -121,9 +121,8 @@ const Weather = () => {
     };
 
     return (
-        <div className={`weather-container ${getWeatherBackgroundClass()}`}>
-            {/* Top Section */}
-            <div className="top-section">
+        <div>
+            <div className="search-section">
                 <h1>That Weather</h1>
                 <form className="weather-form" onSubmit={handleSubmit}>
                     <input
@@ -155,7 +154,7 @@ const Weather = () => {
             </div>
 
             {/* Weather Data Section */}
-            <div className="weather-data">
+            <div className={`weather-container ${getWeatherBackgroundClass()}`}>
                 {loading && (
                     <div>
                         <div className="spinner"></div>
@@ -194,8 +193,7 @@ const Weather = () => {
                         <div className="forecast-cards">
                             {Object.values(
                                 forecast.list.reduce((acc, item) => {
-                                    // Get the date from item.dt_txt and format it properly
-                                    const date = new Date(item.dt_txt).toLocaleDateString(); // Convert to readable date
+                                    const date = new Date(item.dt_txt).toLocaleDateString();
                                     if (!acc[date]) {
                                         acc[date] = {
                                             temp_min: item.main.temp_min,
@@ -205,20 +203,19 @@ const Weather = () => {
                                             pressure: item.main.pressure,
                                             wind: item.wind.speed,
                                             pop: item.pop,
-                                            dt_txt: item.dt_txt,  // Store the full date-time for later use if needed
+                                            dt_txt: item.dt_txt,
                                         };
                                     } else {
-                                        // Update the min/max temperature for the day
                                         acc[date].temp_min = Math.min(acc[date].temp_min, item.main.temp_min);
                                         acc[date].temp_max = Math.max(acc[date].temp_max, item.main.temp_max);
                                     }
                                     return acc;
                                 }, {})
                             )
-                                .slice(0, 6) // You only need the first 6 forecast days
+                                .slice(0, 6)
                                 .map((day, index) => {
                                     const forecastDate = new Date(day.dt_txt);
-                                    const formattedDate = forecastDate.toLocaleDateString(); // Format the date properly here
+                                    const formattedDate = forecastDate.toLocaleDateString();
                                     return (
                                         <div className="forecast-card" key={index}>
                                             <img
@@ -226,9 +223,7 @@ const Weather = () => {
                                                 alt={day.weather.description}
                                                 className="weather-icon"
                                             />
-                                            <p>
-                                                <strong>{formattedDate}</strong> {/* Correct date display */}
-                                            </p>
+                                            <p><strong>{formattedDate}</strong></p>
                                             <p>Temperature: Max {day.temp_max}°C | Min {day.temp_min}°C</p>
                                             <p>{day.weather.description}</p>
                                             <p>Humidity: {day.humidity}%</p>
@@ -238,14 +233,10 @@ const Weather = () => {
                                         </div>
                                     );
                                 })}
-
                         </div>
                     </div>
                 )}
-
-
             </div>
-
         </div>
     );
 };
