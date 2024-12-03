@@ -18,7 +18,7 @@ body {
 
 /* Search Section Styling */
 .search-section {
-    width: 100%;
+    width: 100vw;
     background-color: #ffffff;
     padding: 30px 0;
     text-align: center;
@@ -104,7 +104,6 @@ button svg {
     justify-content: center;
     width: auto;
     height: auto;
-    background-color: #ffffff;
     padding: 20px;
     position: relative;
 }
@@ -249,6 +248,20 @@ button svg {
 .rainy {
     background-color: #a8cfff;
 }
+
+/* Apply background to body instead of weather-container */
+body.sunny {
+    background-color: #ffe680;
+}
+
+body.cloudy {
+    background-color: #d3d3d3;
+}
+
+body.rainy {
+    background-color: #a8cfff;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

@@ -1,4 +1,5 @@
-// Weather.js
+import { useEffect } from 'react';
+
 const Weather = ({ city, fetchWeatherByLocation, loading, weatherResult, forecast, error }) => {
 
     const getWeatherIcon = (iconCode) => {
@@ -18,8 +19,21 @@ const Weather = ({ city, fetchWeatherByLocation, loading, weatherResult, forecas
         return '';
     };
 
+    useEffect(() => {
+        if (weatherResult) {
+            const backgroundClass = getWeatherBackgroundClass();
+            // Apply the background class to the body
+            document.body.className = backgroundClass; // Set the body class to the appropriate weather background
+        }
+
+        // Cleanup: Reset the body class when the component unmounts or weather data changes
+        return () => {
+            document.body.className = ''; // Reset the body class to avoid leftover styles
+        };
+    }, [weatherResult]); // Depend on weatherResult to update background when weather data changes
+
     return (
-        <div className={`weather-container ${getWeatherBackgroundClass()}`}>
+        <div className="weather-container">
             {loading && (
                 <div>
                     <div className="spinner"></div>
