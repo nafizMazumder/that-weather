@@ -11,6 +11,7 @@ const App = () => {
     const [forecast, setForecast] = useState(null);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [locationName, setLocationName] = useState(''); // New state variable
 
     const handleError = (err) => {
         if (err.response) {
@@ -41,6 +42,7 @@ const App = () => {
                 `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
             );
             setWeatherResult(response.data);
+            setLocationName(`${response.data.name}, ${response.data.sys?.country}`);
             const forecastResponse = await axios.get(
                 `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
             );
@@ -65,6 +67,7 @@ const App = () => {
                 `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
             );
             setWeatherResult(response.data);
+            setLocationName(`${response.data.name}, ${response.data.sys?.country}`);
             const forecastResponse = await axios.get(
                 `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`
             );
@@ -106,6 +109,7 @@ const App = () => {
                 fetchWeather={fetchWeather}
                 getLocationWeather={getLocationWeather}
                 loading={loading}
+                locationName={locationName}
             />
             <Weather
                 city={city}

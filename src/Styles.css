@@ -16,31 +16,82 @@ body {
     overflow-x: hidden;
 }
 
+/* Ensure that the image is properly sized and aligned beside the text */
+.header-image {
+    width: 100%;
+    height: auto;
+    max-width: 40px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
 /* Search Section Styling */
 .search-section {
     width: 100vw;
     background-color: #ffffff;
     padding: 30px 0;
-    text-align: center;
     position: sticky;
     top: 0;
     z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .search-section h1 {
     font-size: 2.5rem;
     color: #007BFF;
     font-weight: bold;
-    margin-bottom: 15px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
 }
 
+/* Suggestion List Styling */
+.suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 0;
+    margin-top: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    border-radius: 8px;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+/* Weather Form Styling */
 .weather-form {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    margin-top: 10px;
+    margin: 0;
+    flex-shrink: 0;
+    position: relative;
 }
 
 .weather-form input {
@@ -108,6 +159,12 @@ button svg {
     position: relative;
 }
 
+.location-name {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 /* Weather Data Section */
 .weather-data {
     width: 80%;
@@ -159,6 +216,7 @@ button svg {
     padding: 20px;
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0.9;
 }
 
 .weather-result h2 {
@@ -204,6 +262,7 @@ button svg {
     justify-content: center;
     gap: 15px;
     flex-wrap: wrap;
+    opacity: 0.9;
 }
 
 /* Forecast Card Styling */
@@ -265,7 +324,16 @@ body.rainy {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .header-image {
+        width: 30px;
+        height: 30px;
+    }
+
     .weather-form input {
+        width: 200px;
+    }
+
+    .suggestions-list {
         width: 200px;
     }
 
@@ -284,6 +352,10 @@ body.rainy {
 
 @media (max-width: 480px) {
     .weather-form input {
+        width: 150px;
+    }
+
+    .suggestions-list {
         width: 150px;
     }
 
