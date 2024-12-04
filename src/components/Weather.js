@@ -49,17 +49,31 @@ const Weather = ({ city, fetchWeatherByLocation, loading, weatherResult, forecas
                         alt={weatherResult.weather[0].description}
                         className="weather-icon"
                     />
-                    <p><strong>Date:</strong> {new Date(weatherResult.dt * 1000).toLocaleDateString()}</p>
-                    <p><strong>Temperature:</strong> {weatherResult.main.temp}°C</p>
-                    <p><strong>Feels Like:</strong> {weatherResult.main.feels_like}°C</p>
-                    <p><strong>Condition:</strong> {weatherResult.weather[0].description}</p>
+                    <p><strong>Date:</strong> {new Date(weatherResult.dt * 1000).toLocaleDateString('en-US', {
+                        weekday: 'short',
+                        month: 'short',
+                        day: 'numeric'
+                    })}</p>
+                    <p><strong>High:</strong> {Math.round(weatherResult.main.temp_max)}°C</p>
+                    <p><strong>Current:</strong> {Math.round(weatherResult.main.temp)}°C</p>
+                    <p><strong>Low:</strong> {Math.round(weatherResult.main.temp_min)}°C</p>
+                    <p><strong>Feels Like:</strong> {Math.round(weatherResult.main.feels_like)}°C</p>
+                    <p>
+                        <strong>Condition:</strong> {weatherResult.weather[0].description.charAt(0).toUpperCase() + weatherResult.weather[0].description.slice(1)}
+                    </p>
                     <p><strong>Humidity:</strong> {weatherResult.main.humidity}%</p>
-                    <p><strong>Wind Speed:</strong> {weatherResult.wind.speed} m/s</p>
+                    <p><strong>Wind Speed:</strong> {Math.round(weatherResult.wind.speed * 3.6)} km/h</p>
                     <p><strong>Wind Direction:</strong> {weatherResult.wind.deg}°</p>
                     <p><strong>Visibility:</strong> {weatherResult.visibility / 1000} km</p>
-                    <p><strong>Pressure:</strong> {(weatherResult.main.pressure / 10).toFixed(2)} kPa</p>
-                    <p><strong>Sunrise:</strong> {new Date(weatherResult.sys.sunrise * 1000).toLocaleTimeString()}</p>
-                    <p><strong>Sunset:</strong> {new Date(weatherResult.sys.sunset * 1000).toLocaleTimeString()}</p>
+                    <p><strong>Pressure:</strong> {(weatherResult.main.pressure / 10).toFixed(1)} kPa</p>
+                    <p><strong>Sunrise:</strong> {new Date(weatherResult.sys.sunrise * 1000).toLocaleTimeString([], {
+                        hour: 'numeric',
+                        minute: 'numeric'
+                    })}</p>
+                    <p><strong>Sunset:</strong> {new Date(weatherResult.sys.sunset * 1000).toLocaleTimeString([], {
+                        hour: 'numeric',
+                        minute: 'numeric'
+                    })}</p>
                 </div>
             )}
 
@@ -78,6 +92,8 @@ const Weather = ({ city, fetchWeatherByLocation, loading, weatherResult, forecas
                                         humidity: item.main.humidity,
                                         pressure: item.main.pressure,
                                         wind: item.wind.speed,
+                                        wind_deg: item.wind.deg,
+                                        visibility: item.visibility,
                                         pop: item.pop,
                                         dt_txt: item.dt_txt,
                                     };
@@ -91,7 +107,12 @@ const Weather = ({ city, fetchWeatherByLocation, loading, weatherResult, forecas
                             .slice(0, 6)
                             .map((day, index) => {
                                 const forecastDate = new Date(day.dt_txt);
-                                const formattedDate = forecastDate.toLocaleDateString();
+                                const formattedDate = forecastDate.toLocaleDateString('en-US', {
+                                    weekday: 'short',
+                                    month: 'short',
+                                    day: 'numeric',
+                                });
+
                                 return (
                                     <div className="forecast-card" key={index}>
                                         <img
@@ -99,13 +120,18 @@ const Weather = ({ city, fetchWeatherByLocation, loading, weatherResult, forecas
                                             alt={day.weather.description}
                                             className="weather-icon"
                                         />
-                                        <p><strong>{formattedDate}</strong></p>
-                                        <p>Temperature: Max {day.temp_max}°C | Min {day.temp_min}°C</p>
-                                        <p>{day.weather.description}</p>
-                                        <p>Humidity: {day.humidity}%</p>
-                                        <p>Pressure: {(day.pressure / 10).toFixed(2)} kPa</p>
-                                        <p>Wind Speed: {day.wind} m/s</p>
-                                        <p>Chance of Rain: {day.pop * 100}%</p>
+                                        <p><strong>Date:</strong> {formattedDate}</p>
+                                        <p><strong>High:</strong> {Math.round(day.temp_max)}°C</p>
+                                        <p><strong>Low:</strong> {Math.round(day.temp_min)}°C</p>
+                                        <p>
+                                            <strong>Condition:</strong> {day.weather.description.charAt(0).toUpperCase() + day.weather.description.slice(1)}
+                                        </p>
+                                        <p><strong>Humidity:</strong> {day.humidity}%</p>
+                                        <p><strong>Pressure:</strong> {(day.pressure / 10).toFixed(1)} kPa</p>
+                                        <p><strong>Wind Speed:</strong> {Math.round(day.wind * 3.6)} km/h</p>
+                                        <p><strong>Wind Direction:</strong> {day.wind_deg}°</p>
+                                        <p><strong>Visibility:</strong> {day.visibility / 1000} km</p>
+                                        <p><strong>Chance of Rain:</strong> {Math.round(day.pop * 100)}%</p>
                                     </div>
                                 );
                             })}
