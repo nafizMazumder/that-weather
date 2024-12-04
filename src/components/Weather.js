@@ -30,7 +30,7 @@ const Weather = ({ city, fetchWeatherByLocation, loading, weatherResult, forecas
         return () => {
             document.body.className = ''; // Reset the body class to avoid leftover styles
         };
-    }, [weatherResult]); // Depend on weatherResult to update background when weather data changes
+    }, [weatherResult, getWeatherBackgroundClass]); // Add getWeatherBackgroundClass to dependencies
 
     return (
         <div className="weather-container">
@@ -91,7 +91,7 @@ const Weather = ({ city, fetchWeatherByLocation, loading, weatherResult, forecas
                                         weather: item.weather[0],
                                         humidity: item.main.humidity,
                                         pressure: item.main.pressure,
-                                        wind: item.wind.speed,
+                                        wind_speed: item.wind.speed, // Renamed for clarity
                                         wind_deg: item.wind.deg,
                                         visibility: item.visibility,
                                         pop: item.pop,
@@ -128,7 +128,7 @@ const Weather = ({ city, fetchWeatherByLocation, loading, weatherResult, forecas
                                         </p>
                                         <p><strong>Humidity:</strong> {day.humidity}%</p>
                                         <p><strong>Pressure:</strong> {(day.pressure / 10).toFixed(1)} kPa</p>
-                                        <p><strong>Wind Speed:</strong> {Math.round(day.wind * 3.6)} km/h</p>
+                                        <p><strong>Wind Speed:</strong> {Math.round(day.wind_speed * 3.6)} km/h</p> {/* Corrected here */}
                                         <p><strong>Wind Direction:</strong> {day.wind_deg}°</p>
                                         <p><strong>Visibility:</strong> {day.visibility / 1000} km</p>
                                         <p><strong>Chance of Rain:</strong> {Math.round(day.pop * 100)}%</p>
