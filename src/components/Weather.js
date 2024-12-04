@@ -6,31 +6,31 @@ const Weather = ({ city, fetchWeatherByLocation, loading, weatherResult, forecas
         return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
     };
 
-    const getWeatherBackgroundClass = () => {
-        if (!weatherResult) return '';
-        const condition = weatherResult.weather[0].main.toLowerCase();
-        if (condition === 'clear') {
-            return 'sunny';
-        } else if (condition === 'clouds') {
-            return 'cloudy';
-        } else if (condition === 'rain' || condition === 'drizzle') {
-            return 'rainy';
-        }
-        return '';
-    };
-
     useEffect(() => {
+        const getWeatherBackgroundClass = () => {
+            if (!weatherResult) return '';
+            const condition = weatherResult.weather[0].main.toLowerCase();
+            if (condition === 'clear') {
+                return 'sunny';
+            } else if (condition === 'clouds') {
+                return 'cloudy';
+            } else if (condition === 'rain' || condition === 'drizzle') {
+                return 'rainy';
+            }
+            return '';
+        };
+
         if (weatherResult) {
             const backgroundClass = getWeatherBackgroundClass();
             // Apply the background class to the body
-            document.body.className = backgroundClass; // Set the body class to the appropriate weather background
+            document.body.className = backgroundClass;
         }
 
         // Cleanup: Reset the body class when the component unmounts or weather data changes
         return () => {
             document.body.className = ''; // Reset the body class to avoid leftover styles
         };
-    }, [weatherResult, getWeatherBackgroundClass]); // Add getWeatherBackgroundClass to dependencies
+    }, [weatherResult]); // Depend on weatherResult to update background when weather data changes
 
     return (
         <div className="weather-container">
